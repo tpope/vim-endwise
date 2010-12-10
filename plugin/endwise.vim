@@ -32,6 +32,11 @@ augroup endwise " {{{1
                 \ let b:endwise_addition = 'end&' |
                 \ let b:endwise_words = 'fu\%[nction],wh\%[ile],if,for,try' |
                 \ let b:endwise_syngroups = 'vimFuncKey,vimNotFunc,vimCommand'
+    autocmd FileType lua
+                \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
+                \ let b:endwise_words = 'function,do,then' |
+                \ let b:endwise_pattern = '^\s*\zs\%(function\|do\|then\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<then\|do\ze\%(\s*|.*|\)\=\s*$' |
+                \ let b:endwise_syngroups = 'luaFunction,luaStatement,luaCond'
 augroup END " }}}1
 
 " Maps {{{1
