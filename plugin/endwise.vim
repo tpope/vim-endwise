@@ -32,6 +32,13 @@ augroup endwise " {{{1
                 \ let b:endwise_addition = 'end&' |
                 \ let b:endwise_words = 'fu\%[nction],wh\%[ile],if,for,try' |
                 \ let b:endwise_syngroups = 'vimFuncKey,vimNotFunc,vimCommand'
+    " 'esac' does not de-dent like it should. This seems to be a problem
+    " with the 'sh' syntax itself, since it does that without endwise too.
+    autocmd FileType sh
+                \ let b:endwise_addition = '\=submatch(0)=="if" ? "fi" : submatch(0)=="case" ? "esac" : "done"' |
+                \ let b:endwise_words = 'if,for,while,case' |
+                \ let b:endwise_pattern = '^\s*\zs\%(if\|for\|while\|case\)\>' |
+                \ let b:endwise_syngroups = 'shConditional,shLoop,shIf,shFor,shRepeat,shCaseEsac'
 augroup END " }}}1
 
 " Maps {{{1
