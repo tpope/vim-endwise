@@ -37,7 +37,7 @@ augroup endwise " {{{1
     autocmd FileType sh
                 \ let b:endwise_addition = '\=submatch(0)=="if" ? "fi" : submatch(0)=="case" ? "esac" : "done"' |
                 \ let b:endwise_words = 'if,case,do' |
-                \ let b:endwise_pattern = '\%(^\s*\zs\%(if\|case\)\>\ze\|\zs\<do\>\ze$\|^\s*\zs\<do\>\ze$\)' |
+                \ let b:endwise_pattern = '\%(^\s*\zs\%(if\|case\)\>\ze\|\zs\<do\ze$\|^\s*\zsdo\s*\ze$\)' |
                 \ let b:endwise_syngroups = 'shConditional,shLoop,shIf,shFor,shRepeat,shCaseEsac'
     autocmd FileType lua
                 \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
