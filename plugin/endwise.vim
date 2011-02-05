@@ -18,11 +18,21 @@ set cpo&vim
 
 augroup endwise " {{{1
     au!
+    autocmd FileType lua
+                \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
+                \ let b:endwise_words = 'function,do,then' |
+                \ let b:endwise_pattern = '^\s*\zs\%(function\|do\|then\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<then\|do\ze\%(\s*|.*|\)\=\s*$' |
+                \ let b:endwise_syngroups = 'luaFunction,luaStatement,luaCond'
     autocmd FileType ruby
                 \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
                 \ let b:endwise_words = 'module,class,def,if,unless,case,while,until,begin,do' |
                 \ let b:endwise_pattern = '^\s*\zs\%(module\|class\|def\|if\|unless\|case\|while\|until\|for\|\|begin\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<do\ze\%(\s*|.*|\)\=\s*$' |
                 \ let b:endwise_syngroups = 'rubyModule,rubyClass,rubyDefine,rubyControl,rubyConditional,rubyRepeat'
+    autocmd FileType sh
+                \ let b:endwise_addition = '\=submatch(0)=="if" ? "fi" : submatch(0)=="case" ? "esac" : "done"' |
+                \ let b:endwise_words = 'if,case,do' |
+                \ let b:endwise_pattern = '\%(^\s*\zs\%(if\|case\)\>\ze\|\zs\<do\ze$\|^\s*\zsdo\s*\ze$\)' |
+                \ let b:endwise_syngroups = 'shConditional,shLoop,shIf,shFor,shRepeat,shCaseEsac'
     autocmd FileType vb,vbnet,aspvbs
                 \ let b:endwise_addition = 'End &' |
                 \ let b:endwise_words = 'Function,Sub,Class,Module,Enum,Namespace' |
@@ -32,16 +42,6 @@ augroup endwise " {{{1
                 \ let b:endwise_addition = 'end&' |
                 \ let b:endwise_words = 'fu\%[nction],wh\%[ile],if,for,try' |
                 \ let b:endwise_syngroups = 'vimFuncKey,vimNotFunc,vimCommand'
-    autocmd FileType sh
-                \ let b:endwise_addition = '\=submatch(0)=="if" ? "fi" : submatch(0)=="case" ? "esac" : "done"' |
-                \ let b:endwise_words = 'if,case,do' |
-                \ let b:endwise_pattern = '\%(^\s*\zs\%(if\|case\)\>\ze\|\zs\<do\ze$\|^\s*\zsdo\s*\ze$\)' |
-                \ let b:endwise_syngroups = 'shConditional,shLoop,shIf,shFor,shRepeat,shCaseEsac'
-    autocmd FileType lua
-                \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
-                \ let b:endwise_words = 'function,do,then' |
-                \ let b:endwise_pattern = '^\s*\zs\%(function\|do\|then\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<then\|do\ze\%(\s*|.*|\)\=\s*$' |
-                \ let b:endwise_syngroups = 'luaFunction,luaStatement,luaCond'
 augroup END " }}}1
 
 " Maps {{{1
