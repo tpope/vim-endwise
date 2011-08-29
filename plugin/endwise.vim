@@ -20,11 +20,11 @@ augroup endwise " {{{1
         \ let b:endwise_words = 'module,class,def,if,unless,case,while,until,begin,do' |
         \ let b:endwise_pattern = '^\s*\zs\%(module\|class\|def\|if\|unless\|case\|while\|until\|for\|\|begin\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<do\ze\%(\s*|.*|\)\=\s*$' |
           \ let b:endwise_syngroups = 'rubyModule,rubyClass,rubyDefine,rubyControl,rubyConditional,rubyRepeat'
-  autocmd FileType sh
+  autocmd FileType sh,zsh
         \ let b:endwise_addition = '\=submatch(0)=="if" ? "fi" : submatch(0)=="case" ? "esac" : "done"' |
-        \ let b:endwise_words = 'if,case,do' |
+        \ let b:endwise_words = 'if,until,case,do' |
         \ let b:endwise_pattern = '\%(^\s*\zs\%(if\|case\)\>\ze\|\zs\<do\ze$\|^\s*\zsdo\s*\ze$\)' |
-        \ let b:endwise_syngroups = 'shConditional,shLoop,shIf,shFor,shRepeat,shCaseEsac'
+        \ let b:endwise_syngroups = 'shConditional,shLoop,shIf,shFor,shRepeat,shCaseEsac,zshConditional,zshRepeat,zshDelimiter'
   autocmd FileType vb,vbnet,aspvbs
         \ let b:endwise_addition = 'End &' |
         \ let b:endwise_words = 'Function,Sub,Class,Module,Enum,Namespace' |
@@ -89,9 +89,9 @@ function! s:crend(always)
   let space = matchstr(getline(lnum),'^\s*')
   let col  = match(getline(lnum),beginpat) + 1
   let word  = matchstr(getline(lnum),beginpat)
-  let endpat = substitute(word,'.*',b:endwise_addition,'')
-  let y = n.endpat."\<C-O>O"
-  let endpat = '\<'.substitute(wordchoice,'.*',b:endwise_addition,'').'\>'
+  let endword = substitute(word,'.*',b:endwise_addition,'')
+  let y = n.endword."\<C-O>O"
+  let endpat = '\<'.endword.'\>'
   if a:always
     return y
   elseif col <= 0 || synIDattr(synID(lnum,col,1),'name') !~ '^'.synpat.'$'
