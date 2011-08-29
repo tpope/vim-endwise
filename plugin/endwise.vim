@@ -106,7 +106,6 @@ function! s:crend(always)
   if line == 0
     let even = 0
   endif
-  let g:endwise_debug = line . "(" . even . ")"
   if !even && line == line('.') + 1
     return y
   endif
