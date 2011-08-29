@@ -1,20 +1,12 @@
 " endwise.vim - EndWise
-" Author:       Tim Pope <vimNOSPAM@tpope.info>
+" Author:       Tim Pope <http://tpo.pe/>
 " Version:      1.0
+" GetLatestVimScripts: 2386 1 :AutoInstall: endwise.vim
 
-" Distributable under the same terms as Vim itself (see :help license)
-
-" Exit quickly when:
-" - this plugin was already loaded (or disabled)
-" - when 'compatible' is set
-if (exists("g:loaded_endwise") && g:loaded_endwise) || &cp
+if exists("g:loaded_endwise") || &cp
     finish
 endif
 let g:loaded_endwise = 1
-
-
-let s:cpo_save = &cpo
-set cpo&vim
 
 augroup endwise " {{{1
     au!
@@ -139,6 +131,4 @@ endfunction
 
 " }}}1
 
-let &cpo = s:cpo_save
-
-" vim:set ft=vim ff=unix ts=8 sw=4 sts=4:
+" vim:set sw=4 sts=4:
