@@ -48,11 +48,11 @@ endif
 if maparg('<CR>','i') =~# '<C-R>=.*crend(.)<CR>\|<\%(Plug\|SID\)>.*End'
   " Already mapped
 elseif maparg('<CR>','i') =~ '<CR>'
-  exe "imap <script> <C-X><CR> ".maparg('<CR>','i')."<SID>AlwaysEnd"
-  exe "imap <script> <CR>      ".maparg('<CR>','i')."<SID>DiscretionaryEnd"
+  exe "imap <script> <C-X><CR> ".eval(maparg('<CR>','i'))."<SID>AlwaysEnd"
+  exe "imap <script> <CR>      ".eval(maparg('<CR>','i'))."<SID>DiscretionaryEnd"
 elseif maparg('<CR>','i') =~ '<Plug>delimitMateCR'
-  exe "imap <C-X><CR> ".maparg('<CR>', 'i')."<Plug>AlwaysEnd"
-  exe "imap <CR> ".maparg('<CR>', 'i')."<Plug>DiscretionaryEnd"
+  exe "imap <C-X><CR> ".eval(maparg('<CR>', 'i'))."<Plug>AlwaysEnd"
+  exe "imap <CR> ".eval(maparg('<CR>', 'i'))."<Plug>DiscretionaryEnd"
 else
   imap <C-X><CR> <CR><Plug>AlwaysEnd
   imap <CR>      <CR><Plug>DiscretionaryEnd
