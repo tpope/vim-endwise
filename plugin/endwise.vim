@@ -9,6 +9,10 @@ if exists("g:loaded_endwise") || &cp
 endif
 let g:loaded_endwise = 1
 
+if !exists('g:endwise_add_maps')
+  let g:endwise_add_maps = 1
+endif
+
 augroup endwise " {{{1
   autocmd!
   autocmd FileType lua
@@ -45,21 +49,23 @@ if maparg("<Plug>DiscretionaryEnd") == ""
   imap    <script> <Plug>DiscretionaryEnd <SID>DiscretionaryEnd
   imap    <script> <Plug>AlwaysEnd        <SID>AlwaysEnd
 endif
-if maparg('<CR>','i') =~# '<C-R>=.*crend(.)<CR>\|<\%(Plug\|SID\)>.*End'
-  " Already mapped
-elseif maparg('<CR>','i') =~ '<CR>'
-  exe "imap <script> <C-X><CR> ".maparg('<CR>','i')."<SID>AlwaysEnd"
-  exe "imap <script> <CR>      ".maparg('<CR>','i')."<SID>DiscretionaryEnd"
-elseif maparg('<CR>','i') =~ '<Plug>delimitMateCR'
-  exe "imap <C-X><CR> ".maparg('<CR>', 'i')."<Plug>AlwaysEnd"
-  exe "imap <CR> ".maparg('<CR>', 'i')."<Plug>DiscretionaryEnd"
-else
-  imap <C-X><CR> <CR><Plug>AlwaysEnd
-  imap <CR>      <CR><Plug>DiscretionaryEnd
-endif
+if g:endwise_add_maps
+  if maparg('<CR>','i') =~# '<C-R>=.*crend(.)<CR>\|<\%(Plug\|SNR\)>.*End'
+    " Already mapped
+  elseif maparg('<CR>','i') =~ '<CR>'
+    exe "imap <script> <C-X><CR> ".maparg('<CR>','i')."<SID>AlwaysEnd"
+    exe "imap <script> <CR>      ".maparg('<CR>','i')."<SID>DiscretionaryEnd"
+  elseif maparg('<CR>','i') =~ '<Plug>delimitMateCR'
+    exe "imap <C-X><CR> ".maparg('<CR>', 'i')."<Plug>AlwaysEnd"
+    exe "imap <CR> ".maparg('<CR>', 'i')."<Plug>DiscretionaryEnd"
+  else
+    imap <C-X><CR> <CR><Plug>AlwaysEnd
+    imap <CR>      <CR><Plug>DiscretionaryEnd
+  endif
 
-if maparg('<M-o>','i') == ''
-  inoremap <M-o> <C-O>o
+  if maparg('<M-o>','i') == ''
+    inoremap <M-o> <C-O>o
+  endif
 endif
 
 " }}}1
