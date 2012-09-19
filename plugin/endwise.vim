@@ -45,7 +45,7 @@ if maparg("<Plug>DiscretionaryEnd") == ""
   imap    <script> <Plug>DiscretionaryEnd <SID>DiscretionaryEnd
   imap    <script> <Plug>AlwaysEnd        <SID>AlwaysEnd
 endif
-if maparg('<CR>','i') =~# '<C-R>=.*crend(.)<CR>\|<\%(Plug\|SID\)>.*End'
+if maparg('<CR>','i') =~# '<C-R>=.*crend(.)<CR>\|<\%(Plug\|SNR\)>.*End'
   " Already mapped
 elseif maparg('<CR>','i') =~ '<CR>'
   exe "imap <script> <C-X><CR> ".maparg('<CR>','i')."<SID>AlwaysEnd"
