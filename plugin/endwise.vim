@@ -35,6 +35,10 @@ augroup endwise " {{{1
         \ let b:endwise_addition = 'end&' |
         \ let b:endwise_words = 'fu\%[nction],wh\%[ile],if,for,try' |
         \ let b:endwise_syngroups = 'vimFuncKey,vimNotFunc,vimCommand'
+	autocmd FileType js
+				\ let b:endwise_additon = "};&" |
+				\ let b:endwsie_words = 'function, if' |
+				\	let b:endwise_syngroups = 'javaScriptFunction,javaScriptConditional'
 augroup END " }}}1
 
 " Maps {{{1
