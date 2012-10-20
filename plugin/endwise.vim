@@ -53,6 +53,9 @@ augroup endwise " {{{1
 		autocmd FileType dot
 				\ let b:endwise_addition = '}'
 				\ let b:endwise_words = '{'
+		autocmd FileType *.scala
+				\ let b:endwise_addition = '}'
+				\ let b:endwise_words = '{'
 augroup END " }}}1
 
 " Maps {{{1
