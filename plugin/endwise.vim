@@ -41,10 +41,15 @@ augroup endwise " {{{1
 				\	let b:endwise_syngroups = 'javaScriptFunction,javaScriptConditional'
 	autocmd FileType *.io
 				\	let b:endwise_addition = ")" |
-				\ let b:endwise_words = "("
+				\ let b:endwise_words    = "("
 	autocmd FileType *.rl
 				\ let b:endwise_addition = "}%%"
-				\ let b:endwise_words = "%%{"
+				\ let b:endwise_words    = "%%{"
+	  autocmd FileType c,cpp,objc
+        \ let b:endwise_addition  = '}' |
+        \ let b:endwise_words     = '{' |
+        \ let b:endwise_pattern   = '\%(else\s*\)\@<!{\s*$' |
+        \ let b:endwise_syngroups = '.*'
 augroup END " }}}1
 
 " Maps {{{1
