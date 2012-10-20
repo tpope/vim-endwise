@@ -50,6 +50,9 @@ augroup endwise " {{{1
         \ let b:endwise_words     = '{' |
         \ let b:endwise_pattern   = '\%(else\s*\)\@<!{\s*$' |
         \ let b:endwise_syngroups = '.*'
+		autocmd FileType dot
+				\ let b:endwise_addition = '}'
+				\ let b:endwise_words = '{'
 augroup END " }}}1
 
 " Maps {{{1
