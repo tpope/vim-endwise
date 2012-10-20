@@ -39,6 +39,9 @@ augroup endwise " {{{1
 				\ let b:endwise_additon   = "}" |
 				\ let b:endwsie_words     = '{' |
 				\	let b:endwise_syngroups = 'javaScriptFunction,javaScriptConditional'
+	autocmd FileType *.io
+				\	let b:endwise_addition = ")" |
+				\ let b:endwise_words = "("
 augroup END " }}}1
 
 " Maps {{{1
