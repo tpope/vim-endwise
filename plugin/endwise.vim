@@ -59,6 +59,9 @@ augroup endwise " {{{1
 		autocmd FileType *.ooc
 				\ let b:endwise_addition = '}'
 				\ let b:endwise_words =  '{'
+		autocmd FileType *.clj
+				\ let b:endwise_addition = ')'
+				\ let endwise_words = '('
 augroup END " }}}1
 
 " Maps {{{1
