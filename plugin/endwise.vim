@@ -12,32 +12,32 @@ let g:loaded_endwise = 1
 augroup endwise " {{{1
   autocmd!
   autocmd FileType lua
-        \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
-        \ let b:endwise_words = 'function,do,then' |
-        \ let b:endwise_pattern = '^\s*\zs\%(function\|do\|then\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<then\|do\ze\%(\s*|.*|\)\=\s*$' |
+        \ let b:endwise_addition  = '\=submatch(0)=="{" ? "}" : "end"' |
+        \ let b:endwise_words     = 'function,do,then' |
+        \ let b:endwise_pattern   = '^\s*\zs\%(function\|do\|then\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<then\|do\ze\%(\s*|.*|\)\ = \s*$' |
         \ let b:endwise_syngroups = 'luaFunction,luaStatement,luaCond'
   autocmd FileType ruby
-        \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
-        \ let b:endwise_words = 'module,class,def,if,unless,case,while,until,begin,do' |
-        \ let b:endwise_pattern = '^\s*\zs\%(module\|class\|def\|if\|unless\|case\|while\|until\|for\|\|begin\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<do\ze\%(\s*|.*|\)\=\s*$' |
-          \ let b:endwise_syngroups = 'rubyModule,rubyClass,rubyDefine,rubyControl,rubyConditional,rubyRepeat'
+        \ let b:endwise_addition  = '\=submatch(0)=="{" ? "}" : "end"' |
+        \ let b:endwise_words     = 'module,class,def,if,unless,case,while,until,begin,do' |
+        \ let b:endwise_pattern   = '^\s*\zs\%(module\|class\|def\|if\|unless\|case\|while\|until\|for\|\|begin\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<do\ze\%(\s*|.*|\)\ = \s*$' |
+        \ let b:endwise_syngroups = 'rubyModule,rubyClass,rubyDefine,rubyControl,rubyConditional,rubyRepeat'
   autocmd FileType sh,zsh
-        \ let b:endwise_addition = '\=submatch(0)=="if" ? "fi" : submatch(0)=="case" ? "esac" : "done"' |
-        \ let b:endwise_words = 'if,until,case,do' |
-        \ let b:endwise_pattern = '\%(^\s*\zs\%(if\|case\)\>\ze\|\zs\<do\ze$\|^\s*\zsdo\s*\ze$\)' |
+        \ let b:endwise_addition  = '\=submatch(0)=="if" ? "fi" : submatch(0)=="case" ? "esac" : "done"' |
+        \ let b:endwise_words     = 'if,until,case,do' |
+        \ let b:endwise_pattern   = '\%(^\s*\zs\%(if\|case\)\>\ze\|\zs\<do\ze$\|^\s*\zsdo\s*\ze$\)' |
         \ let b:endwise_syngroups = 'shConditional,shLoop,shIf,shFor,shRepeat,shCaseEsac,zshConditional,zshRepeat,zshDelimiter'
   autocmd FileType vb,vbnet,aspvbs
-        \ let b:endwise_addition = 'End &' |
-        \ let b:endwise_words = 'Function,Sub,Class,Module,Enum,Namespace' |
-        \ let b:endwise_pattern = '\%(\<End\>.*\)\@<!\<&\>' |
+        \ let b:endwise_addition  = 'End &' |
+        \ let b:endwise_words     = 'Function,Sub,Class,Module,Enum,Namespace' |
+        \ let b:endwise_pattern   = '\%(\<End\>.*\)\@<!\<&\>' |
         \ let b:endwise_syngroups = 'vbStatement,vbnetStorage,vbnetProcedure,vbnet.*Words,AspVBSStatement'
   autocmd FileType vim
-        \ let b:endwise_addition = 'end&' |
-        \ let b:endwise_words = 'fu\%[nction],wh\%[ile],if,for,try' |
+        \ let b:endwise_addition  = 'end&' |
+        \ let b:endwise_words     = 'fu\%[nction],wh\%[ile],if,for,try' |
         \ let b:endwise_syngroups = 'vimFuncKey,vimNotFunc,vimCommand'
 	autocmd FileType js
-				\ let b:endwise_additon = "}" |
-				\ let b:endwsie_words = '{' |
+				\ let b:endwise_additon   = "}" |
+				\ let b:endwsie_words     = '{' |
 				\	let b:endwise_syngroups = 'javaScriptFunction,javaScriptConditional'
 augroup END " }}}1
 
