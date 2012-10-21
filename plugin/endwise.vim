@@ -11,6 +11,11 @@ let g:loaded_endwise = 1
 
 augroup endwise " {{{1
   autocmd!
+  autocmd FileType c,cpp,objc
+        \ let b:endwise_addition = '}' |
+        \ let b:endwise_words = '{' |
+        \ let b:endwise_pattern = '\%(else\s*\)\@<!{\s*$' |
+        \ let b:endwise_syngroups = '.*'
   autocmd FileType lua
         \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
         \ let b:endwise_words = 'function,do,then' |
