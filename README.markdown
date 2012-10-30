@@ -5,7 +5,7 @@ This is a simple plugin that helps to end certain structures
 automatically.  In Ruby, this means adding `end` after `if`, `do`, `def`
 and several other keywords. In Vimscript, this amounts to appropriately
 adding `endfunction`, `endif`, etc.  There's also Bourne shell, VB
-(don't ask), and Lua support.
+(don't ask), C/C++ preprocessor, and Lua support.
 
 A primary guiding principle in designing this plugin was that an
 erroneous insertion is never acceptable.  The behavior is only triggered

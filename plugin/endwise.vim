@@ -35,6 +35,11 @@ augroup endwise " {{{1
         \ let b:endwise_addition = 'end&' |
         \ let b:endwise_words = 'fu\%[nction],wh\%[ile],if,for,try' |
         \ let b:endwise_syngroups = 'vimFuncKey,vimNotFunc,vimCommand'
+  autocmd FileType c,cpp
+        \ let b:endwise_addition = '#endif' |
+        \ let b:endwise_words = '#if,#ifdef,#ifndef' |
+        \ let b:endwise_pattern = '^\s*#\%(if\|ifdef\|ifndef\)\s\+.\+$' |
+        \ let b:endwise_syngroups = 'cPreCondit,cCppInWrapper'
 augroup END " }}}1
 
 " Maps {{{1
