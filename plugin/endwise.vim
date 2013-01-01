@@ -1,6 +1,6 @@
 " endwise.vim - EndWise
 " Author:       Tim Pope <http://tpo.pe/>
-" Version:      1.0
+" Version:      1.1
 " License:      Same as Vim itself.  See :help license
 " GetLatestVimScripts: 2386 1 :AutoInstall: endwise.vim
 
