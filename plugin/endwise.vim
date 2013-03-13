@@ -31,6 +31,11 @@ augroup endwise " {{{1
         \ let b:endwise_words = 'Function,Sub,Class,Module,Enum,Namespace' |
         \ let b:endwise_pattern = '\%(\<End\>.*\)\@<!\<&\>' |
         \ let b:endwise_syngroups = 'vbStatement,vbnetStorage,vbnetProcedure,vbnet.*Words,AspVBSStatement'
+  autocmd FileType make
+        \ let b:endwise_addition = 'endif' |
+        \ let b:endwise_words = 'ifdef,ifeq,ifneq' |
+        \ let b:endwise_pattern = '^&\>' |
+        \ let b:endwise_syngroups = 'makePreCondit'
   autocmd FileType vim
         \ let b:endwise_addition = 'end&' |
         \ let b:endwise_words = 'fu\%[nction],wh\%[ile],if,for,try' |
