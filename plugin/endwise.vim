@@ -64,10 +64,6 @@ if !exists('g:endwise_no_mappings')
     imap <C-X><CR> <CR><Plug>AlwaysEnd
     imap <CR>      <CR><Plug>DiscretionaryEnd
   endif
-
-  if maparg('<M-o>','i') == ''
-    inoremap <M-o> <C-O>o
-  endif
 endif
 
 " }}}1
