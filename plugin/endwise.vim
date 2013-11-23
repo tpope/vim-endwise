@@ -45,6 +45,10 @@ augroup endwise " {{{1
         \ let b:endwise_words = '#if,#ifdef,#ifndef' |
         \ let b:endwise_pattern = '^\s*#\%(if\|ifdef\|ifndef\)\s\+.\+$' |
         \ let b:endwise_syngroups = 'cPreCondit,cCppInWrapper,xdefaultsPreProc'
+  autocmd FileType matlab
+        \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
+        \ let b:endwise_words = 'function,if,for' |
+        \ let b:endwise_syngroups = 'matlabFunction,matlabConditional,matlabRepeat'
 augroup END " }}}1
 
 " Maps {{{1
