@@ -48,7 +48,7 @@ augroup endwise " {{{1
   autocmd FileType matlab
         \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
         \ let b:endwise_words = 'function,if,for' |
-        \ let b:endwise_syngroups = 'matlabFunction,matlabConditional,matlabRepeat'
+        \ let b:endwise_syngroups = 'matlabStatement,matlabFunction,matlabConditional,matlabRepeat'
 augroup END " }}}1
 
 " Maps {{{1
