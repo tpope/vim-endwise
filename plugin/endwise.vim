@@ -66,7 +66,7 @@ if !exists('g:endwise_no_mappings')
   elseif maparg('<CR>','i') =~ '<CR>'
     exe "imap <script> <C-X><CR> ".maparg('<CR>','i')."<SID>AlwaysEnd"
     exe "imap <script> <CR>      ".maparg('<CR>','i')."<SID>DiscretionaryEnd"
-  elseif maparg('<CR>','i') =~ '<Plug>delimitMateCR'
+  elseif maparg('<CR>','i') =~ '<Plug>\w\+CR'
     exe "imap <C-X><CR> ".maparg('<CR>', 'i')."<Plug>AlwaysEnd"
     exe "imap <CR> ".maparg('<CR>', 'i')."<Plug>DiscretionaryEnd"
   else
