@@ -61,17 +61,31 @@ if maparg("<Plug>DiscretionaryEnd") == ""
 endif
 
 if !exists('g:endwise_no_mappings')
-  if maparg('<CR>','i') =~# '<C-R>=.*crend(.)<CR>\|<\%(Plug\|SNR\|SID\)>.*End'
+  let maparg = maparg('<CR>', 'i')
+  if maparg =~# '<C-R>=.*crend(.)<CR>\|<\%(Plug\|SNR\|SID\)>.*End'
     " Already mapped
-  elseif maparg('<CR>','i') =~ '<CR>'
-    exe "imap <script> <C-X><CR> ".maparg('<CR>','i')."<SID>AlwaysEnd"
-    exe "imap <script> <CR>      ".maparg('<CR>','i')."<SID>DiscretionaryEnd"
-  elseif maparg('<CR>','i') =~ '<Plug>\w\+CR'
-    exe "imap <C-X><CR> ".maparg('<CR>', 'i')."<Plug>AlwaysEnd"
-    exe "imap <CR> ".maparg('<CR>', 'i')."<Plug>DiscretionaryEnd"
+  elseif maparg =~ '<Plug>\w\+CR'
+    exe "imap <C-X><CR> ".maparg."<Plug>AlwaysEnd"
+    exe "imap <CR>      ".maparg."<Plug>DiscretionaryEnd"
+  elseif maparg =~ '<CR>'
+    exe "imap <script> <C-X><CR> ".maparg."<SID>AlwaysEnd"
+    exe "imap <script> <CR>      ".maparg."<SID>DiscretionaryEnd"
   else
-    imap <C-X><CR> <CR><Plug>AlwaysEnd
-    imap <CR>      <CR><Plug>DiscretionaryEnd
+    " Use <unique> to get a warning, if user maps would get overwritten,
+    " then catch the error and provide help to fix it.
+    for m in [
+          \ 'imap <unique> <C-X><CR> <CR><Plug>AlwaysEnd',
+          \ 'imap <unique> <CR>      <CR><Plug>DiscretionaryEnd']
+      try
+        exec m
+      catch /^Vim\%((\a\+)\)\=:E227/  " E227: mapping already exists for ^X^M
+        let exception_msg = substitute(v:exception, '^\S\+: ', '', '')
+        echohl WarningMsg
+        echom 'endwise: not overwriting existing map ('.exception_msg.').'
+              \ 'Set g:endwise_no_mappings=1 to skip setup of mappings.'
+        echohl None
+      endtry
+    endfor
   endif
 endif
 
