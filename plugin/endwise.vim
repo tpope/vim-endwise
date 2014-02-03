@@ -71,8 +71,21 @@ if !exists('g:endwise_no_mappings')
     exe "imap <script> <C-X><CR> ".maparg."<SID>AlwaysEnd"
     exe "imap <script> <CR>      ".maparg."<SID>DiscretionaryEnd"
   else
-    imap <C-X><CR> <CR><Plug>AlwaysEnd
-    imap <CR>      <CR><Plug>DiscretionaryEnd
+    " Use <unique> to get a warning, if user maps would get overwritten,
+    " then catch the error and provide help to fix it.
+    for m in [
+          \ 'imap <unique> <C-X><CR> <CR><Plug>AlwaysEnd',
+          \ 'imap <unique> <CR>      <CR><Plug>DiscretionaryEnd']
+      try
+        exec m
+      catch /^Vim\%((\a\+)\)\=:E227/  " E227: mapping already exists for ^X^M
+        let exception_msg = substitute(v:exception, '^\S\+: ', '', '')
+        echohl WarningMsg
+        echom 'endwise: not overwriting existing map ('.exception_msg.').'
+              \ 'Set g:endwise_no_mappings=1 to skip setup of mappings.'
+        echohl None
+      endtry
+    endfor
   endif
 endif
 
