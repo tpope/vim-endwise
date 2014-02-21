@@ -13,8 +13,8 @@ augroup endwise " {{{1
   autocmd!
   autocmd FileType lua
         \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
-        \ let b:endwise_words = 'function,do,then' |
-        \ let b:endwise_pattern = '^\s*\zs\%(function\|do\|then\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<then\|do\ze\%(\s*|.*|\)\=\s*$' |
+        \ let b:endwise_words = 'function,local\%(\s\+\)function,do,then' |
+        \ let b:endwise_pattern = '^\s*\zs\%(function\|local\s\+function\|do\|then\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<then\|do\ze\%(\s*|.*|\)\=\s*$' |
         \ let b:endwise_syngroups = 'luaFunction,luaStatement,luaCond'
   autocmd FileType elixir
         \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
