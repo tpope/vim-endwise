@@ -12,17 +12,17 @@ let g:loaded_endwise = 1
 augroup endwise " {{{1
   autocmd!
   autocmd FileType lua
-        \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
+        \ let b:endwise_addition = 'end' |
         \ let b:endwise_words = 'function,local\%(\s\+\)function,do,then' |
         \ let b:endwise_pattern = '^\s*\zs\%(function\|local\s\+function\|do\|then\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<then\|do\ze\%(\s*|.*|\)\=\s*$' |
         \ let b:endwise_syngroups = 'luaFunction,luaStatement,luaCond'
   autocmd FileType elixir
-        \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
+        \ let b:endwise_addition = 'end' |
         \ let b:endwise_words = 'case,cond,bc,lc,inlist,inbits,if,unless,try,receive,function,fn' |
         \ let b:endwise_pattern = '^\(.*=\)\?\s*\zs\%(case\|cond\|bc\|lc\|inlist\|inbits\|if\|unless\|try\|receive\|function\|fn\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<do\ze\%(\s*|.*|\)\=\s*$' |
         \ let b:endwise_syngroups = 'elixirKeyword'
   autocmd FileType ruby
-        \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
+        \ let b:endwise_addition = 'end' |
         \ let b:endwise_words = 'module,class,def,if,unless,case,while,until,begin,do' |
         \ let b:endwise_pattern = '^\(.*=\)\?\s*\zs\%(module\|class\|def\|if\|unless\|case\|while\|until\|for\|\|begin\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<do\ze\%(\s*|.*|\)\=\s*$' |
         \ let b:endwise_syngroups = 'rubyModule,rubyClass,rubyDefine,rubyControl,rubyConditional,rubyRepeat'
@@ -38,20 +38,20 @@ augroup endwise " {{{1
         \ let b:endwise_syngroups = 'vbStatement,vbnetStorage,vbnetProcedure,vbnet.*Words,AspVBSStatement'
   autocmd FileType vim
         \ let b:endwise_addition = 'end&' |
-        \ let b:endwise_words = 'fu\%[nction],wh\%[ile],if,for,try' |
+        \ let b:endwise_words = 'fu,fun,func,function,wh,while,if,for,try' |
         \ let b:endwise_syngroups = 'vimFuncKey,vimNotFunc,vimCommand'
   autocmd FileType c,cpp,xdefaults
         \ let b:endwise_addition = '#endif' |
-        \ let b:endwise_words = '#if,#ifdef,#ifndef' |
-        \ let b:endwise_pattern = '^\s*#\%(if\|ifdef\|ifndef\)\s\+.\+$' |
+        \ let b:endwise_words = 'if,ifdef,ifndef' |
+        \ let b:endwise_pattern = '^\s*#\%(if\|ifdef\|ifndef\)\>' |
         \ let b:endwise_syngroups = 'cPreCondit,cPreConditMatch,cCppInWrapper,xdefaultsPreProc'
   autocmd FileType objc
         \ let b:endwise_addition = '@end' |
-        \ let b:endwise_words = '@interface,@implementation' |
-        \ let b:endwise_pattern = '\v^\s*\@%(interface|implementation)\s+.+$' |
+        \ let b:endwise_words = 'interface,implementation' |
+        \ let b:endwise_pattern = '^\s*@\%(interface\|implementation\)\>' |
         \ let b:endwise_syngroups = 'objcObjDef'
   autocmd FileType matlab
-        \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
+        \ let b:endwise_addition = 'end' |
         \ let b:endwise_words = 'function,if,for' |
         \ let b:endwise_syngroups = 'matlabStatement,matlabFunction,matlabConditional,matlabRepeat'
 augroup END " }}}1
