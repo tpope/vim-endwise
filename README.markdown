@@ -27,11 +27,6 @@ then simply copy and paste:
     cd ~/.vim/bundle
     git clone git://github.com/tpope/vim-endwise.git
 
-## Contributing
-
-See the contribution guidelines for
-[pathogen.vim](https://github.com/tpope/vim-pathogen#readme).
-
 ## Self-Promotion
 
 Like endwise.vim? Follow the repository on
