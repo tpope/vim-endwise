@@ -13,13 +13,13 @@ augroup endwise " {{{1
   autocmd!
   autocmd FileType lua
         \ let b:endwise_addition = 'end' |
-        \ let b:endwise_words = 'function,local\%(\s\+\)function,do,then' |
-        \ let b:endwise_pattern = '^\s*\zs\%(function\|local\s\+function\|do\|then\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<then\|do\ze\%(\s*|.*|\)\=\s*$' |
+        \ let b:endwise_words = 'function,do,then' |
+        \ let b:endwise_pattern = '^\s*\zs\%(\%(local\s\+\)\=function\)\>\%(.*\<end\>\)\@!\|\<\%(then\|do\)\ze\s*$' |
         \ let b:endwise_syngroups = 'luaFunction,luaStatement,luaCond'
   autocmd FileType elixir
         \ let b:endwise_addition = 'end' |
         \ let b:endwise_words = 'case,cond,bc,lc,inlist,inbits,if,unless,try,receive,function,fn' |
-        \ let b:endwise_pattern = '^\(.*=\)\?\s*\zs\%(case\|cond\|bc\|lc\|inlist\|inbits\|if\|unless\|try\|receive\|function\|fn\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<do\ze\%(\s*|.*|\)\=\s*$' |
+        \ let b:endwise_pattern = '^\s*\zs\%(case\|cond\|bc\|lc\|inlist\|inbits\|if\|unless\|try\|receive\|function\|fn\)\>\%(.*[^:]\<end\>\)\@!' |
         \ let b:endwise_syngroups = 'elixirKeyword'
   autocmd FileType ruby
         \ let b:endwise_addition = 'end' |
