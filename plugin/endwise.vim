@@ -44,7 +44,7 @@ augroup endwise " {{{1
         \ let b:endwise_addition = '#endif' |
         \ let b:endwise_words = '#if,#ifdef,#ifndef' |
         \ let b:endwise_pattern = '^\s*#\%(if\|ifdef\|ifndef\)\s\+.\+$' |
-        \ let b:endwise_syngroups = 'cPreCondit,cCppInWrapper,xdefaultsPreProc'
+        \ let b:endwise_syngroups = 'cPreCondit,cPreConditMatch,cCppInWrapper,xdefaultsPreProc'
   autocmd FileType objc
         \ let b:endwise_addition = '@end' |
         \ let b:endwise_words = '@interface,@implementation' |
