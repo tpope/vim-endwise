@@ -110,7 +110,11 @@ function! s:crend(always)
   let word  = matchstr(getline(lnum),beginpat)
   let endword = substitute(word,'.*',b:endwise_addition,'')
   let y = n.endword."\<C-O>O"
-  let endpat = '\w\@<!'.endword.'\w\@!'
+  if b:endwise_addition[0:1] ==# '\='
+    let endpat = '\w\@<!'.endword.'\w\@!'
+  else
+    let endpat = '\w\@<!'.substitute('\w\+', '.*', b:endwise_addition, '').'\w\@!'
+  endif
   if a:always
     return y
   elseif col <= 0 || synIDattr(synID(lnum,col,1),'name') !~ '^'.synpat.'$'
