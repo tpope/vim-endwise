@@ -1,4 +1,4 @@
-" endwise.vim - EndWise
+" Location:     plugin/endwise.vim
 " Author:       Tim Pope <http://tpo.pe/>
 " Version:      1.1
 " License:      Same as Vim itself.  See :help license
