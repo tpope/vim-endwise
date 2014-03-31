@@ -76,7 +76,7 @@ if !exists('g:endwise_no_mappings')
     exe "imap <CR> ".maparg('<CR>', 'i')."<Plug>DiscretionaryEnd"
   else
     imap <script> <C-X><CR> <CR><SID>AlwaysEnd
-    imap <script> <CR>      <CR><SID>DiscretionaryEnd
+    imap <CR> <CR><Plug>DiscretionaryEnd
   endif
 endif
 
