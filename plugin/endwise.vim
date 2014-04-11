@@ -54,7 +54,16 @@ augroup endwise " {{{1
         \ let b:endwise_addition = 'end' |
         \ let b:endwise_words = 'function,if,for' |
         \ let b:endwise_syngroups = 'matlabStatement,matlabFunction,matlabConditional,matlabRepeat'
+  autocmd FileType * call s:abbrev()
 augroup END " }}}1
+
+function! s:abbrev()
+  if exists('g:endwise_abbreviations')
+    for word in split(get(b:, 'endwise_words', ''), ',')
+      execute 'iabbrev <buffer><script>' word word.'<CR><SID>DiscretionaryEnd<Space><C-U><BS>'
+    endfor
+  endif
+endfunction
 
 " Maps {{{1
 
