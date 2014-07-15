@@ -19,7 +19,7 @@ augroup endwise " {{{1
   autocmd FileType elixir
         \ let b:endwise_addition = 'end' |
         \ let b:endwise_words = 'case,cond,bc,lc,inlist,inbits,if,unless,try,receive,function,fn,do' |
-        \ let b:endwise_pattern = '^\s*\zs\%(case\|cond\|bc\|lc\|inlist\|inbits\|if\|unless\|try\|receive\|function\|fn\|do\)\>\%(.*[^:]\<end\>\)\@!' |
+        \ let b:endwise_pattern = '^.*\zs\%(case\|cond\|bc\|lc\|inlist\|inbits\|if\|unless\|try\|receive\|function\|fn\|do\)\>\%(.*[^:]\<end\>\)\@!' |
         \ let b:endwise_syngroups = 'elixirKeyword'
   autocmd FileType ruby
         \ let b:endwise_addition = 'end' |
