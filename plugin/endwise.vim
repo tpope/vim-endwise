@@ -54,6 +54,10 @@ augroup endwise " {{{1
         \ let b:endwise_addition = 'end' |
         \ let b:endwise_words = 'function,if,for' |
         \ let b:endwise_syngroups = 'matlabStatement,matlabFunction,matlabConditional,matlabRepeat'
+  autocmd FileType julia
+        \ let b:endwise_addition = 'end' |
+        \ let b:endwise_words = 'if,for,while,begin,function,macro,quote,type,immutable,let,do,module,baremodule,try' |
+        \ let b:endwise_syngroups = 'juliaConditional,juliaRepeat,juliaBlKeyword,juliaException'
   autocmd FileType * call s:abbrev()
 augroup END " }}}1
 
