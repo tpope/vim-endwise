@@ -57,8 +57,13 @@ augroup endwise " {{{1
         \ let b:endwise_syngroups = 'objcObjDef'
   autocmd FileType matlab
         \ let b:endwise_addition = 'end' |
-        \ let b:endwise_words = 'function,if,for' |
-        \ let b:endwise_syngroups = 'matlabStatement,matlabFunction,matlabConditional,matlabRepeat'
+        \ let b:endwise_words = 'function,if,for,while,parfor,switch,try,classdef,events,methods,properties' |
+        \ let b:endwise_syngroups = 'matlabStatement,matlabFunction,matlabConditional,matlabRepeat,matlabFunc,matlabLabel,matlabExceptions,matlabOO,matlabStorageClass'
+  autocmd FileType octave
+        \ let b:endwise_addition = '\=submatch(0)=="try" ? "end_try_catch" : submatch(0)=="unwind_protect" ? "end_unwind_protect" : submatch(0)=="do" ? "until" : "end".submatch(0)' |
+        \ let b:endwise_words = 'function,if,for,parfor,while,switch,try,unwind_protect,classdef,enumeration,events,methods,properties,do' |
+        \ let b:endwise_pattern = '\%(^\s*\zs\<\%(function\|if\|for\|parfor\|while\|switch\|try\|unwind_protect\|classdef\|enumeration\|events\|methods\|properties\|do\)\ze\s*$\)' |
+        \ let b:endwise_syngroups = 'octaveBeginKeyword,octaveStatement,octaveReserved,octaveEndKeyword'
   autocmd FileType * call s:abbrev()
 augroup END " }}}1
 
