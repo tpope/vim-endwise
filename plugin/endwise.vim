@@ -74,6 +74,18 @@ function! s:abbrev()
   endif
 endfunction
 
+" Functions {{{1
+
+function! EndwiseDiscretionary()
+  return <SID>crend(0)
+endfunction
+
+function! EndwiseAlways()
+  return <SID>crend(1)
+endfunction
+
+" }}}1
+
 " Maps {{{1
 
 if maparg("<Plug>DiscretionaryEnd") == ""
