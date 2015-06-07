@@ -42,9 +42,9 @@ augroup endwise " {{{1
         \ let b:endwise_pattern = '\%(\<End\>.*\)\@<!\<&\>' |
         \ let b:endwise_syngroups = 'vbStatement,vbnetStorage,vbnetProcedure,vbnet.*Words,AspVBSStatement'
   autocmd FileType vim
-        \ let b:endwise_addition = 'end&' |
-        \ let b:endwise_words = 'fu,fun,func,function,wh,while,if,for,try' |
-        \ let b:endwise_syngroups = 'vimFuncKey,vimNotFunc,vimCommand'
+        \ let b:endwise_addition = '\=submatch(0)=="augroup" ? submatch(0) . " END" : "end" . submatch(0)' |
+        \ let b:endwise_words = 'fu,fun,func,function,wh,while,if,for,try,au,augroup' |
+        \ let b:endwise_syngroups = 'vimFuncKey,vimNotFunc,vimCommand,vimAugroupKey'
   autocmd FileType c,cpp,xdefaults
         \ let b:endwise_addition = '#endif' |
         \ let b:endwise_words = 'if,ifdef,ifndef' |
