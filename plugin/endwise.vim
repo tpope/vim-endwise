@@ -78,6 +78,11 @@ function! s:abbrev()
   endif
 endfunction
 
+function! s:teardownMappings()
+  inoremap <buffer> <C-X><CR> <C-X><CR>
+  inoremap <buffer> <CR> <CR>
+endfunction
+
 " Functions {{{1
 
 function! EndwiseDiscretionary()
@@ -112,6 +117,7 @@ if !exists('g:endwise_no_mappings')
     imap <script> <C-X><CR> <CR><SID>AlwaysEnd
     imap <CR> <CR><Plug>DiscretionaryEnd
   endif
+  autocmd endwise CmdwinEnter * call s:teardownMappings()
 endif
 
 " }}}1
