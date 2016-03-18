@@ -67,6 +67,10 @@ augroup endwise " {{{1
         \ let b:endwise_addition = 'endsnippet' |
         \ let b:endwise_words = 'snippet' |
         \ let b:endwise_syngroups = 'snipSnippet,snipSnippetHeader,snipSnippetHeaderKeyword'
+  autocmd FileType sql
+        \ let b:endwise_addition = '\="end" . (submatch(0) !~# "begin" ? submatch(0) : "") . ";" ' |
+        \ let b:endwise_words = 'if,loop,begin' |
+        \ let b:endwise_syngroups = 'sqlKeyword'
   autocmd FileType * call s:abbrev()
 augroup END " }}}1
 
