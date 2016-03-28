@@ -74,7 +74,7 @@ function! s:filetype_sql()
   let b:endwise_syngroups = 'sqlKeyword'
   let current_dialect = get(b:, 'sql_type_override', get(g:, 'sql_type_default', 'sqloracle')) " :help sql-dialects
   if  current_dialect == 'sqloracle'
-    let b:endwise_addition = '\="end" . (submatch(0) !~# "begin" ? submatch(0) : "") . ";" ' |
+    let b:endwise_addition = '\="end" . (submatch(0) !~? "begin" ? " ".submatch(0) : "") . ";" ' |
     let b:endwise_words = 'loop,begin,if'
   endif
 endfunction
