@@ -124,11 +124,10 @@ endif
 
 " Code {{{1
 
-function! s:mysearchpair(beginpat,endpat,synpat)
-  let g:endwise_syntaxes = ""
+function! s:mysearchpair(beginpat,endpat,synidpat)
   let s:lastline = line('.')
-  call s:synname()
-  let line = searchpair(a:beginpat,'',a:endpat,'Wn','<SID>synname() !~# "^'.substitute(a:synpat,'\\','\\\\','g').'$"',line('.')+50)
+  call s:synid()
+  let line = searchpair(a:beginpat,'',a:endpat,'Wn','<SID>synid() !~# "^'.substitute(a:synidpat,'\\','\\\\','g').'$"',line('.')+50)
   return line
 endfunction
 
@@ -137,7 +136,7 @@ function! s:crend(always)
   if !exists("b:endwise_addition") || !exists("b:endwise_words") || !exists("b:endwise_syngroups")
     return n
   end
-  let synpat  = '\%('.substitute(b:endwise_syngroups,',','\\|','g').'\)'
+  let synids = join(map(split(b:endwise_syngroups, ','), 'hlID(v:val)'), ',')
   let wordchoice = '\%('.substitute(b:endwise_words,',','\\|','g').'\)'
   if exists("b:endwise_pattern")
     let beginpat = substitute(b:endwise_pattern,'&',substitute(wordchoice,'\\','\\&','g'),'g')
@@ -155,14 +154,15 @@ function! s:crend(always)
   else
     let endpat = '\w\@<!'.substitute('\w\+', '.*', b:endwise_addition, '').'\w\@!'
   endif
+  let synidpat  = '\%('.substitute(synids,',','\\|','g').'\)'
   if a:always
     return y
-  elseif col <= 0 || synIDattr(synID(lnum,col,1),'name') !~ '^'.synpat.'$'
+  elseif col <= 0 || synID(lnum,col,1) !~ '^'.synidpat.'$'
     return n
   elseif getline('.') !~ '^\s*#\=$'
     return n
   endif
-  let line = s:mysearchpair(beginpat,endpat,synpat)
+  let line = s:mysearchpair(beginpat,endpat,synidpat)
   " even is false if no end was found, or if the end found was less
   " indented than the current line
   let even = strlen(matchstr(getline(line),'^\s*')) >= strlen(space)
@@ -178,15 +178,14 @@ function! s:crend(always)
   return y
 endfunction
 
-function! s:synname()
+function! s:synid()
   " Checking this helps to force things to stay in sync
   while s:lastline < line('.')
-    let s = synIDattr(synID(s:lastline,indent(s:lastline)+1,1),'name')
+    let s = synID(s:lastline,indent(s:lastline)+1,1)
     let s:lastline = nextnonblank(s:lastline + 1)
   endwhile
 
-  let s = synIDattr(synID(line('.'),col('.'),1),'name')
-  let g:endwise_syntaxes = g:endwise_syntaxes . line('.').','.col('.')."=".s."\n"
+  let s = synID(line('.'),col('.'),1)
   let s:lastline = line('.')
   return s
 endfunction
