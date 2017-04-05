@@ -61,7 +61,7 @@ augroup endwise " {{{1
         \ let b:endwise_syngroups = 'matlabStatement,matlabFunction,matlabConditional,matlabRepeat'
   autocmd FileType htmldjango
         \ let b:endwise_addition = '{% end& %}' |
-        \ let b:endwise_words = 'autoescape,block\(\s\+\S*\)\?,blocktrans,cache,comment,filter,for,if,ifchanged,ifequal,ifnotequal,language,spaceless,verbatim,with' |
+        \ let b:endwise_words = 'autoescape,block,blocktrans,cache,comment,filter,for,if,ifchanged,ifequal,ifnotequal,language,spaceless,verbatim,with' |
         \ let b:endwise_syngroups = 'djangoTagBlock,djangoStatement'
   autocmd FileType snippets
         \ let b:endwise_addition = 'endsnippet' |
