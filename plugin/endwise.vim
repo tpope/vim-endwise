@@ -67,6 +67,11 @@ augroup endwise " {{{1
         \ let b:endwise_addition = 'endsnippet' |
         \ let b:endwise_words = 'snippet' |
         \ let b:endwise_syngroups = 'snipSnippet,snipSnippetHeader,snipSnippetHeaderKeyword'
+  autocmd FileType blade
+        \ let b:endwise_addition = '\=submatch(0)=="hasSection" ? "@endif" : "@end" . submatch(0)' |
+        \ let b:endwise_words = 'if,foreach,forelse,for,while,can,section,push,unless,hasSection' |
+        \ let b:endwise_pattern = '@\zs\%(if\|foreach\|forelse\|for\|while\|can\|push\|unless\|hasSection\)\ze\|section\ze\s*([^,]*)' |
+        \ let b:endwise_syngroups = 'bladeKeyword'
   autocmd FileType * call s:abbrev()
 augroup END " }}}1
 
