@@ -17,9 +17,9 @@ augroup endwise " {{{1
         \ let b:endwise_pattern = '^\s*\zs\%(\%(local\s\+\)\=function\)\>\%(.*\<end\>\)\@!\|\<\%(then\|do\)\ze\s*$' |
         \ let b:endwise_syngroups = 'luaFunction,luaStatement,luaCond'
   autocmd FileType elixir
-        \ let b:endwise_addition = 'end' |
+        \ let b:endwise_addition = '\=match(getline(lnum), ''.*[^.:@$]\zs\%(do\|\<fn\>.*->\)\%([^#]\|#{\)*\ze\%([^.:@#$]\<end\>\)'') > -1 ? "\<ESC>ddi" : "end"' |
         \ let b:endwise_words = 'do,fn' |
-        \ let b:endwise_pattern = '.*[^.:@$]\zs\<\%(do\(:\)\@!\|fn\)\>\ze\%(.*[^.:@$]\<end\>\)\@!' |
+        \ let b:endwise_pattern = '.*[^.:@$]\zs\<\%(do\(:\)\@!\|fn\)\>' |
         \ let b:endwise_syngroups = 'elixirBlockDefinition'
   autocmd FileType ruby
         \ let b:endwise_addition = 'end' |
