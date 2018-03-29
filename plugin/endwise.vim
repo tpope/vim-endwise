@@ -63,6 +63,10 @@ augroup endwise " {{{1
         \ let b:endwise_addition = '{% end& %}' |
         \ let b:endwise_words = 'autoescape,block,blocktrans,cache,comment,filter,for,if,ifchanged,ifequal,ifnotequal,language,spaceless,verbatim,with' |
         \ let b:endwise_syngroups = 'djangoTagBlock,djangoStatement'
+  autocmd FileType htmljinja,jinja.html
+        \ let b:endwise_addition = '{% end& %}' |
+        \ let b:endwise_words = 'autoescape,block,cache,call,filter,for,if,macro,raw,set,trans,with' |
+        \ let b:endwise_syngroups = 'jinjaTagBlock,jinjaStatement'
   autocmd FileType snippets
         \ let b:endwise_addition = 'endsnippet' |
         \ let b:endwise_words = 'snippet' |
