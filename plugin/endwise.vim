@@ -153,7 +153,9 @@ function! s:crend(always)
   let word  = matchstr(getline(lnum),beginpat)
   let endword = substitute(word,'.*',b:endwise_addition,'')
   let y = n.endword."\<C-O>O"
-  if b:endwise_addition[0:1] ==# '\='
+  if exists("b:endwise_end_pattern")
+    let endpat = '\w\@<!'.substitute(word, '.*', substitute(b:endwise_end_pattern, '\\', '\\\\', 'g'), '').'\w\@!'
+  elseif b:endwise_addition[0:1] ==# '\='
     let endpat = '\w\@<!'.endword.'\w\@!'
   else
     let endpat = '\w\@<!'.substitute('\w\+', '.*', b:endwise_addition, '').'\w\@!'
