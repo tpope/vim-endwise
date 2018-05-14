@@ -139,7 +139,7 @@ function! s:crend(always)
   let n = ""
   if !exists("b:endwise_addition") || !exists("b:endwise_words") || !exists("b:endwise_syngroups")
     return n
-  end
+  endif
   let synids = join(map(split(b:endwise_syngroups, ','), 'hlID(v:val)'), ',')
   let wordchoice = '\%('.substitute(b:endwise_words,',','\\|','g').'\)'
   if exists("b:endwise_pattern")
