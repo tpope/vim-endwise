@@ -43,7 +43,7 @@ augroup endwise " {{{1
         \ let b:endwise_syngroups = 'vbStatement,vbnetStorage,vbnetProcedure,vbnet.*Words,AspVBSStatement'
   autocmd FileType vim
         \ let b:endwise_addition = '\=submatch(0)=~"aug\\%[roup]" ? submatch(0) . " END" : "end" . submatch(0)' |
-        \ let b:endwise_words = 'fu,fun,func,function,wh,while,if,for,try,aug\%[roup]' |
+        \ let b:endwise_words = 'fu\%[nction],wh\%[ile],if,for,try,aug\%[roup]' |
         \ let b:endwise_syngroups = 'vimFuncKey,vimNotFunc,vimCommand,vimAugroupKey'
   autocmd FileType c,cpp,xdefaults,haskell
         \ let b:endwise_addition = '#endif' |
