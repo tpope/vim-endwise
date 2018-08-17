@@ -114,10 +114,10 @@ if !exists('g:endwise_no_mappings')
     " Already mapped
   elseif maparg('<CR>','i') =~ '<CR>'
     exe "imap <script> <C-X><CR> ".maparg('<CR>','i')."<SID>AlwaysEnd"
-    exe "imap <script> <CR>      ".maparg('<CR>','i')."<SID>DiscretionaryEnd"
+    exe "imap <silent> <script> <CR>      ".maparg('<CR>','i')."<SID>DiscretionaryEnd"
   elseif maparg('<CR>','i') =~ '<Plug>\w\+CR'
     exe "imap <C-X><CR> ".maparg('<CR>', 'i')."<Plug>AlwaysEnd"
-    exe "imap <CR> ".maparg('<CR>', 'i')."<Plug>DiscretionaryEnd"
+    exe "imap <silent> <CR> ".maparg('<CR>', 'i')."<Plug>DiscretionaryEnd"
   else
     imap <script> <C-X><CR> <CR><SID>AlwaysEnd
     imap <CR> <CR><Plug>DiscretionaryEnd
