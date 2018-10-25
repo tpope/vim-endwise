@@ -58,8 +58,8 @@ augroup endwise " {{{1
         \ let b:endwise_syngroups = 'objcObjDef'
   autocmd FileType matlab
         \ let b:endwise_addition = 'end' |
-        \ let b:endwise_words = 'function,if,for,switch' |
-        \ let b:endwise_syngroups = 'matlabStatement,matlabFunction,matlabConditional,matlabRepeat,matlabLabel'
+        \ let b:endwise_words = 'function,if,for' |
+        \ let b:endwise_syngroups = 'matlabStatement,matlabFunction,matlabConditional,matlabRepeat'
   autocmd FileType htmldjango
         \ let b:endwise_addition = '{% end& %}' |
         \ let b:endwise_words = 'autoescape,block,blocktrans,cache,comment,filter,for,if,ifchanged,ifequal,ifnotequal,language,spaceless,verbatim,with' |
