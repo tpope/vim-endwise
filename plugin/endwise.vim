@@ -112,7 +112,7 @@ endfunction
 
 " Maps {{{1
 
-if maparg("<Plug>DiscretionaryEnd") == ""
+if empty(maparg("<Plug>DiscretionaryEnd"))
   inoremap <silent> <SID>DiscretionaryEnd <C-R>=<SID>crend(0)<CR>
   inoremap <silent> <SID>AlwaysEnd        <C-R>=<SID>crend(1)<CR>
   imap    <script> <Plug>DiscretionaryEnd <SID>DiscretionaryEnd
@@ -122,10 +122,10 @@ endif
 if !exists('g:endwise_no_mappings')
   if maparg('<CR>','i') =~# '<C-R>=.*crend(.)<CR>\|<\%(Plug\|SNR\|SID\)>.*End'
     " Already mapped
-  elseif maparg('<CR>','i') =~ '<CR>'
+  elseif maparg('<CR>','i') =~? '<cr>'
     exe "imap <script> <C-X><CR> ".maparg('<CR>','i')."<SID>AlwaysEnd"
     exe "imap <silent> <script> <CR>      ".maparg('<CR>','i')."<SID>DiscretionaryEnd"
-  elseif maparg('<CR>','i') =~ '<Plug>\w\+CR'
+  elseif maparg('<CR>','i') =~# '<Plug>\w\+CR'
     exe "imap <C-X><CR> ".maparg('<CR>', 'i')."<Plug>AlwaysEnd"
     exe "imap <silent> <CR> ".maparg('<CR>', 'i')."<Plug>DiscretionaryEnd"
   else
@@ -176,7 +176,7 @@ function! s:crend(always)
     return y
   elseif col <= 0 || synID(lnum,col,1) !~ '^'.synidpat.'$'
     return n
-  elseif getline('.') !~ '^\s*#\=$'
+  elseif getline('.') !~# '^\s*#\=$'
     return n
   endif
   let line = s:mysearchpair(beginpat,endpat,synidpat)
