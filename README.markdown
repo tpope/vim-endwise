@@ -16,8 +16,8 @@ found.
 While the goal was to make it customizable, this turned out to be a tall
 order.  Every language has vastly different requirements.  Nonetheless,
 for those bold enough to attempt it, you can follow the model of the
-autocmds in the plugin to set the three magic variables governing
-endwise's behavior.
+ftplugin files to set the three magic variables governing endwise's
+behavior.
 
 ## Installation
 
