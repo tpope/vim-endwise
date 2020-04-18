@@ -1,7 +1,7 @@
 # endwise.vim
 
 This is a simple plugin that helps to end certain structures
-automatically.  In Ruby, this means adding `end` after `if`, `do`, `def`
+automatically.  E.g. in Ruby, this means adding `end` after `if`, `do`, `def`
 and several other keywords. In Vimscript, this amounts to appropriately
 adding `endfunction`, `endif`, etc.  There's also Bourne shell, Z shell,
 VB (don't ask), C/C++ preprocessor, Lua, Elixir, Haskell, Objective-C,
@@ -27,6 +27,14 @@ then simply copy and paste:
 
     cd ~/.vim/bundle
     git clone git://github.com/tpope/vim-endwise.git
+
+Or use Vim's built-in package support:
+
+```
+mkdir -p ~/.vim/pack/tpope/start
+cd ~/.vim/pack/tpope/start
+git clone git://github.com/tpope/vim-endwise.git
+```
 
 ## Self-Promotion
 
