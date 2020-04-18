@@ -21,7 +21,7 @@ endwise's behavior.
 
 ## Installation
 
-Install using Vim's built-in package support:
+Install using your favorite package manager, or use Vim's built-in package support:
 
 ```
 mkdir -p ~/.vim/pack/tpope/start
