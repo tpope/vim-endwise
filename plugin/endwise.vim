@@ -61,7 +61,7 @@ augroup endwise " {{{1
         \ let b:endwise_words = 'ifdef,ifndef,ifeq,ifneq,define' |
         \ let b:endwise_pattern = '^\s*\(d\zsef\zeine\|\zsif\zen\=\(def\|eq\)\)\>' |
         \ let b:endwise_syngroups = 'makePreCondit,makeDefine'
-  autocmd FileType verilog
+  autocmd FileType verilog,systemverilog
         \ let b:endwise_addition = '\="end" . submatch(0)' |
         \ let b:endwise_words = 'begin,module,case,function,primitive,specify,task' |
         \ let b:endwise_pattern = '\<\%(\zs\zebegin\|module\|case\|function\|primitive\|specify\|task\)\>.*$' |
