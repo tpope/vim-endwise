@@ -83,8 +83,18 @@ augroup endwise " {{{1
         \ let b:endwise_addition = 'endsnippet' |
         \ let b:endwise_words = 'snippet' |
         \ let b:endwise_syngroups = 'snipSnippet,snipSnippetHeader,snipSnippetHeaderKeyword'
+  autocmd FileType sql call s:filetype_sql()
   autocmd FileType * call s:abbrev()
-augroup END " }}}1
+augroup END
+function! s:filetype_sql()
+  let b:endwise_syngroups = 'sqlKeyword'
+  let current_dialect = get(b:, 'sql_type_override', get(g:, 'sql_type_default', 'sqloracle')) " :help sql-dialects
+  if  current_dialect == 'sqloracle'
+    let b:endwise_addition = '\="end" . (submatch(0) !~? "begin" ? " ".submatch(0) : "") . ";" ' |
+    let b:endwise_words = 'loop,begin,if'
+  endif
+endfunction
+" }}}1
 
 function! s:abbrev()
   if exists('g:endwise_abbreviations')
