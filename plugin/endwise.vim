@@ -86,7 +86,7 @@ augroup endwise " {{{1
   autocmd FileType * call s:abbrev()
 augroup END " }}}1
 
-function! s:abbrev()
+function! s:abbrev() abort
   if exists('g:endwise_abbreviations')
     for word in split(get(b:, 'endwise_words', ''), ',')
       execute 'iabbrev <buffer><script>' word word.'<CR><SID>DiscretionaryEnd<Space><C-U><BS>'
@@ -94,18 +94,18 @@ function! s:abbrev()
   endif
 endfunction
 
-function! s:teardownMappings()
+function! s:teardownMappings() abort
   inoremap <buffer> <C-X><CR> <C-X><CR>
   inoremap <buffer> <CR> <CR>
 endfunction
 
 " Functions {{{1
 
-function! EndwiseDiscretionary()
+function! EndwiseDiscretionary() abort
   return <SID>crend(0)
 endfunction
 
-function! EndwiseAlways()
+function! EndwiseAlways() abort
   return <SID>crend(1)
 endfunction
 
@@ -140,14 +140,14 @@ endif
 
 " Code {{{1
 
-function! s:mysearchpair(beginpat,endpat,synidpat)
+function! s:mysearchpair(beginpat, endpat, synidpat) abort
   let s:lastline = line('.')
   call s:synid()
   let line = searchpair(a:beginpat,'',a:endpat,'Wn','<SID>synid() !~# "^'.substitute(a:synidpat,'\\','\\\\','g').'$"',line('.')+50)
   return line
 endfunction
 
-function! s:crend(always)
+function! s:crend(always) abort
   let n = ""
   if !exists("b:endwise_addition") || !exists("b:endwise_words") || !exists("b:endwise_syngroups")
     return n
@@ -196,7 +196,7 @@ function! s:crend(always)
   return y
 endfunction
 
-function! s:synid()
+function! s:synid() abort
   " Checking this helps to force things to stay in sync
   while s:lastline < line('.')
     let s = synID(s:lastline,indent(s:lastline)+1,1)
