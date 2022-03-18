@@ -4,7 +4,7 @@
 " License:      Same as Vim itself.  See :help license
 " GetLatestVimScripts: 2386 1 :AutoInstall: endwise.vim
 
-if exists("g:loaded_endwise") || &cp
+if exists("g:loaded_endwise") || v:version < 704 || &cp
   finish
 endif
 let g:loaded_endwise = 1
