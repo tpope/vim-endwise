@@ -114,14 +114,14 @@ endfunction
 " Maps {{{1
 
 if empty(maparg("<Plug>DiscretionaryEnd"))
-  inoremap <silent> <SID>DiscretionaryEnd <C-R>=<SID>crend(0)<CR>
-  inoremap <silent> <SID>AlwaysEnd        <C-R>=<SID>crend(1)<CR>
+  inoremap <silent> <SID>DiscretionaryEnd <C-R>=EndwiseDiscretionary()<CR>
+  inoremap <silent> <SID>AlwaysEnd        <C-R>=EndwiseAlways()<CR>
   imap    <script> <Plug>DiscretionaryEnd <SID>DiscretionaryEnd
   imap    <script> <Plug>AlwaysEnd        <SID>AlwaysEnd
 endif
 
 if !exists('g:endwise_no_mappings')
-  if maparg('<CR>','i') =~# '<C-R>=.*crend(.)<CR>\|<\%(Plug\|SNR\|SID\)>.*End'
+  if maparg('<CR>','i') =~# '[eE]ndwise\|<\%(Plug\|SNR\|SID\)>.*End'
     " Already mapped
   elseif maparg('<CR>','i') =~? '<cr>'
     exe "imap <script> <C-X><CR> ".maparg('<CR>','i')."<SID>AlwaysEnd"
