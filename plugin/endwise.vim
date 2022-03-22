@@ -87,7 +87,7 @@ augroup endwise " {{{1
 augroup END " }}}1
 
 function! s:abbrev() abort
-  if exists('g:endwise_abbreviations')
+  if get(g:, 'endwise_abbreviations', 0)
     for word in split(get(b:, 'endwise_words', ''), ',')
       execute 'iabbrev <buffer><script>' word word.'<CR><SID>DiscretionaryEnd<Space><C-U><BS>'
     endfor
