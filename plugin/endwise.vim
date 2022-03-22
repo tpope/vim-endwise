@@ -95,7 +95,6 @@ function! s:abbrev() abort
 endfunction
 
 function! s:teardownMappings() abort
-  inoremap <buffer> <C-X><CR> <C-X><CR>
   inoremap <buffer> <CR> <CR>
 endfunction
 
@@ -115,22 +114,17 @@ endfunction
 
 if empty(maparg("<Plug>DiscretionaryEnd"))
   inoremap <silent> <SID>DiscretionaryEnd <C-R>=EndwiseDiscretionary()<CR>
-  inoremap <silent> <SID>AlwaysEnd        <C-R>=EndwiseAlways()<CR>
   imap    <script> <Plug>DiscretionaryEnd <SID>DiscretionaryEnd
-  imap    <script> <Plug>AlwaysEnd        <SID>AlwaysEnd
 endif
 
 if !exists('g:endwise_no_mappings')
   if maparg('<CR>','i') =~# '[eE]ndwise\|<\%(Plug\|SNR\|SID\)>.*End'
     " Already mapped
   elseif maparg('<CR>','i') =~? '<cr>'
-    exe "imap <script> <C-X><CR> ".maparg('<CR>','i')."<SID>AlwaysEnd"
     exe "imap <silent> <script> <CR>      ".maparg('<CR>','i')."<SID>DiscretionaryEnd"
   elseif maparg('<CR>','i') =~# '<Plug>\w\+CR'
-    exe "imap <C-X><CR> ".maparg('<CR>', 'i')."<Plug>AlwaysEnd"
     exe "imap <silent> <CR> ".maparg('<CR>', 'i')."<Plug>DiscretionaryEnd"
   else
-    imap <script> <C-X><CR> <CR><SID>AlwaysEnd
     imap <CR> <CR><Plug>DiscretionaryEnd
   endif
   autocmd endwise CmdwinEnter * call s:teardownMappings()
