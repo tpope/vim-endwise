@@ -177,7 +177,7 @@ function! s:crend(always) abort
     return y
   elseif col <= 0 || synID(lnum,col,1) !~ '^'.synidpat.'$'
     return n
-  elseif getline('.') !~# '^\s*#\=$'
+  elseif getline('.') !~# '^\s*$'
     return n
   endif
   let line = s:mysearchpair(beginpat,endpat,synidpat)
