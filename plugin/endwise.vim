@@ -97,6 +97,16 @@ endfunction
 
 " Functions {{{1
 
+function! EndwiseAppend(...) abort
+  if !a:0 || type(a:1) != type('')
+    return "\<C-R>=EndwiseDiscretionary()\r"
+  elseif a:1 =~# "\r"
+    return a:1 . "\<C-R>=EndwiseDiscretionary()\r"
+  else
+    return a:1
+  endif
+endfunction
+
 function! EndwiseDiscretionary() abort
   return <SID>crend(0)
 endfunction
@@ -116,13 +126,14 @@ function! s:NeutralizeMap() abort
 endfunction
 
 imap <script><expr> <SID>(endwise-append) EndwiseDiscretionary()
+imap <script> <Plug>(endwise-append) <SID>(endwise-append)
 imap <script> <Plug>DiscretionaryEnd <SID>(endwise-append)
 
-if !exists('g:endwise_no_mappings')
-  if maparg('<CR>','i') =~# '[eE]ndwise\|<Plug>DiscretionaryEnd'
-    " Already mapped
+if !exists('g:endwise_no_mappings') && maparg('<CR>','i') !~# '[eE]ndwise\|<Plug>DiscretionaryEnd'
+  if get(maparg('<CR>', 'i', 0, 1), 'expr')
+    exe "imap <silent><script><expr> <CR> EndwiseAppend(" . substitute(substitute(maparg('<CR>','i'), '|', '<Bar>', 'g'), '\c<sid>', "\<SNR>" . get(maparg('<CR>','i', 0, 1), 'sid') . '_', 'g') . ')'
   elseif maparg('<CR>','i') =~? '<cr>'
-    exe "imap <silent> <script> <CR>      ".maparg('<CR>','i')."<SID>(endwise-append)"
+    exe "imap <silent><script> <CR>" substitute(maparg('<CR>','i'), '|', '<Bar>', 'g')."<SID>(endwise-append)"
   elseif maparg('<CR>','i') =~# '<Plug>\w\+CR'
     exe "imap <silent> <CR> ".maparg('<CR>', 'i')."<SID>(endwise-append)"
   else
