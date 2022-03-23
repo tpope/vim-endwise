@@ -84,6 +84,7 @@ augroup endwise " {{{1
         \ let b:endwise_words = 'snippet' |
         \ let b:endwise_syngroups = 'snipSnippet,snipSnippetHeader,snipSnippetHeaderKeyword'
   autocmd FileType * call s:abbrev()
+  autocmd CmdwinEnter * call s:NeutralizeMap()
 augroup END " }}}1
 
 function! s:abbrev() abort
@@ -92,10 +93,6 @@ function! s:abbrev() abort
       execute 'iabbrev <buffer><script>' word word.'<CR><SID>(endwise-append)<Space><C-U><BS>'
     endfor
   endif
-endfunction
-
-function! s:teardownMappings() abort
-  inoremap <buffer> <CR> <CR>
 endfunction
 
 " Functions {{{1
@@ -112,6 +109,12 @@ endfunction
 
 " Maps {{{1
 
+function! s:NeutralizeMap() abort
+  if maparg('<CR>', 'i') =~# '[Ee]ndwise\|<Plug>DiscretionaryEnd'
+    inoremap <buffer> <CR> <CR>
+  endif
+endfunction
+
 imap <script><expr> <SID>(endwise-append) EndwiseDiscretionary()
 imap <script> <Plug>DiscretionaryEnd <SID>(endwise-append)
 
@@ -125,7 +128,6 @@ if !exists('g:endwise_no_mappings')
   else
     imap <script> <CR> <CR><SID>(endwise-append)
   endif
-  autocmd endwise CmdwinEnter * call s:teardownMappings()
 endif
 
 " }}}1
