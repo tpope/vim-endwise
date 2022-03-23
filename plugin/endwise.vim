@@ -85,6 +85,7 @@ augroup endwise " {{{1
         \ let b:endwise_syngroups = 'snipSnippet,snipSnippetHeader,snipSnippetHeaderKeyword'
   autocmd FileType * call s:abbrev()
   autocmd CmdwinEnter * call s:NeutralizeMap()
+  autocmd VimEnter * call s:DefineMap()
 augroup END " }}}1
 
 function! s:abbrev() abort
@@ -129,7 +130,10 @@ imap <script><expr> <SID>(endwise-append) EndwiseDiscretionary()
 imap <script> <Plug>(endwise-append) <SID>(endwise-append)
 imap <script> <Plug>DiscretionaryEnd <SID>(endwise-append)
 
-if !exists('g:endwise_no_mappings') && maparg('<CR>','i') !~# '[eE]ndwise\|<Plug>DiscretionaryEnd'
+function! s:DefineMap() abort
+  if exists('g:endwise_no_mappings') || maparg('<CR>','i') =~# '[eE]ndwise\|<Plug>DiscretionaryEnd'
+    return
+  endif
   if get(maparg('<CR>', 'i', 0, 1), 'expr')
     exe "imap <silent><script><expr> <CR> EndwiseAppend(" . substitute(substitute(maparg('<CR>','i'), '|', '<Bar>', 'g'), '\c<sid>', "\<SNR>" . get(maparg('<CR>','i', 0, 1), 'sid') . '_', 'g') . ')'
   elseif maparg('<CR>','i') =~? '<cr>'
@@ -139,7 +143,8 @@ if !exists('g:endwise_no_mappings') && maparg('<CR>','i') !~# '[eE]ndwise\|<Plug
   else
     imap <script> <CR> <CR><SID>(endwise-append)
   endif
-endif
+endfunction
+call s:DefineMap()
 
 " }}}1
 
