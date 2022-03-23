@@ -89,7 +89,7 @@ augroup END " }}}1
 function! s:abbrev() abort
   if get(g:, 'endwise_abbreviations', 0)
     for word in split(get(b:, 'endwise_words', ''), ',')
-      execute 'iabbrev <buffer><script>' word word.'<CR><SID>DiscretionaryEnd<Space><C-U><BS>'
+      execute 'iabbrev <buffer><script>' word word.'<CR><SID>(endwise-append)<Space><C-U><BS>'
     endfor
   endif
 endfunction
@@ -112,20 +112,18 @@ endfunction
 
 " Maps {{{1
 
-if empty(maparg("<Plug>DiscretionaryEnd"))
-  inoremap <silent> <SID>DiscretionaryEnd <C-R>=EndwiseDiscretionary()<CR>
-  imap    <script> <Plug>DiscretionaryEnd <SID>DiscretionaryEnd
-endif
+imap <script><expr> <SID>(endwise-append) EndwiseDiscretionary()
+imap <script> <Plug>DiscretionaryEnd <SID>(endwise-append)
 
 if !exists('g:endwise_no_mappings')
-  if maparg('<CR>','i') =~# '[eE]ndwise\|<\%(Plug\|SNR\|SID\)>.*End'
+  if maparg('<CR>','i') =~# '[eE]ndwise\|<Plug>DiscretionaryEnd'
     " Already mapped
   elseif maparg('<CR>','i') =~? '<cr>'
-    exe "imap <silent> <script> <CR>      ".maparg('<CR>','i')."<SID>DiscretionaryEnd"
+    exe "imap <silent> <script> <CR>      ".maparg('<CR>','i')."<SID>(endwise-append)"
   elseif maparg('<CR>','i') =~# '<Plug>\w\+CR'
-    exe "imap <silent> <CR> ".maparg('<CR>', 'i')."<Plug>DiscretionaryEnd"
+    exe "imap <silent> <CR> ".maparg('<CR>', 'i')."<SID>(endwise-append)"
   else
-    imap <CR> <CR><Plug>DiscretionaryEnd
+    imap <script> <CR> <CR><SID>(endwise-append)
   endif
   autocmd endwise CmdwinEnter * call s:teardownMappings()
 endif
