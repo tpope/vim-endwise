@@ -96,7 +96,7 @@ function! s:abbrev() abort
   endif
 endfunction
 
-" Functions {{{1
+" Maps {{{1
 
 function! EndwiseAppend(...) abort
   if !a:0 || type(a:1) != type('')
@@ -109,16 +109,12 @@ function! EndwiseAppend(...) abort
 endfunction
 
 function! EndwiseDiscretionary() abort
-  return <SID>crend(0)
+  return s:crend(0)
 endfunction
 
 function! EndwiseAlways() abort
-  return <SID>crend(1)
+  return s:crend(1)
 endfunction
-
-" }}}1
-
-" Maps {{{1
 
 function! s:NeutralizeMap() abort
   if maparg('<CR>', 'i') =~# '[Ee]ndwise\|<Plug>DiscretionaryEnd'
