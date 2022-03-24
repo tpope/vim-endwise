@@ -21,13 +21,12 @@ endwise's behavior.
 
 ## Installation
 
-Install using your favorite package manager, or use Vim's built-in package support:
+Install using your favorite package manager, or use Vim's built-in package
+support:
 
-```
-mkdir -p ~/.vim/pack/tpope/start
-cd ~/.vim/pack/tpope/start
-git clone git://github.com/tpope/vim-endwise.git
-```
+    mkdir -p ~/.vim/pack/tpope/start
+    cd ~/.vim/pack/tpope/start
+    git clone https://tpope.io/vim/endwise.git
 
 ## Self-Promotion
 
