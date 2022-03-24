@@ -1,6 +1,6 @@
 " Location:     plugin/endwise.vim
 " Author:       Tim Pope <http://tpo.pe/>
-" Version:      1.2
+" Version:      1.3
 " License:      Same as Vim itself.  See :help license
 " GetLatestVimScripts: 2386 1 :AutoInstall: endwise.vim
 
