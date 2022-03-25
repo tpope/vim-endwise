@@ -127,7 +127,7 @@ imap <script> <Plug>(endwise-append) <SID>(endwise-append)
 imap <script> <Plug>DiscretionaryEnd <SID>(endwise-append)
 
 function! s:DefineMap() abort
-  if exists('g:endwise_no_mappings') || maparg('<CR>','i') =~# '[eE]ndwise\|<Plug>DiscretionaryEnd'
+  if exists('g:endwise_no_mappings') || maparg('<CR>','i') =~# '[eE]ndwise\|<Plug>DiscretionaryEnd' || get(maparg('<CR>', 'i', 0, 1), 'buffer')
     return
   endif
   if get(maparg('<CR>', 'i', 0, 1), 'expr')
