@@ -127,15 +127,16 @@ imap <script> <Plug>(endwise-append) <SID>(endwise-append)
 imap <script> <Plug>DiscretionaryEnd <SID>(endwise-append)
 
 function! s:DefineMap() abort
-  if exists('g:endwise_no_mappings') || maparg('<CR>','i') =~# '[eE]ndwise\|<Plug>DiscretionaryEnd' || get(maparg('<CR>', 'i', 0, 1), 'buffer')
+  let rhs = substitute(maparg('<CR>', 'i'), '|', '<Bar>', 'g')
+  if exists('g:endwise_no_mappings') || rhs =~# '[eE]ndwise\|<Plug>DiscretionaryEnd' || get(maparg('<CR>', 'i', 0, 1), 'buffer')
     return
   endif
   if get(maparg('<CR>', 'i', 0, 1), 'expr')
-    exe "imap <silent><script><expr> <CR> EndwiseAppend(" . substitute(substitute(maparg('<CR>','i'), '|', '<Bar>', 'g'), '\c<sid>', "\<SNR>" . get(maparg('<CR>','i', 0, 1), 'sid') . '_', 'g') . ')'
-  elseif maparg('<CR>','i') =~? '<cr>'
-    exe "imap <silent><script> <CR>" substitute(maparg('<CR>','i'), '|', '<Bar>', 'g')."<SID>(endwise-append)"
-  elseif maparg('<CR>','i') =~# '<Plug>\w\+CR'
-    exe "imap <silent> <CR> ".maparg('<CR>', 'i')."<SID>(endwise-append)"
+    exe "imap <silent><script><expr> <CR> EndwiseAppend(" . rhs . ")"
+  elseif rhs =~? '<cr>' && rhs !~? '<plug>'
+    exe "imap <silent><script> <CR>" rhs."<SID>(endwise-append)"
+  elseif rhs =~? '<cr>' || rhs =~# '<[Pp]lug>\w\+CR'
+    exe "imap <silent> <CR>" rhs."<SID>(endwise-append)"
   else
     imap <script> <CR> <CR><SID>(endwise-append)
   endif
