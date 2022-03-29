@@ -122,7 +122,7 @@ function! s:NeutralizeMap() abort
   endif
 endfunction
 
-imap <script><expr> <SID>(endwise-append) EndwiseDiscretionary()
+imap <script><silent> <SID>(endwise-append) <C-R>=EndwiseDiscretionary()<CR>
 imap <script> <Plug>(endwise-append) <SID>(endwise-append)
 imap <script> <Plug>DiscretionaryEnd <SID>(endwise-append)
 
