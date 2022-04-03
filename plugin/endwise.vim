@@ -71,6 +71,11 @@ augroup endwise " {{{1
         \ let b:endwise_addition = 'end' |
         \ let b:endwise_words = 'function,if,for' |
         \ let b:endwise_syngroups = 'matlabStatement,matlabFunction,matlabConditional,matlabRepeat'
+  autocmd FileType julia
+        \ let b:endwise_addition = 'end' |
+        \ let b:endwise_words = 'module,struct,function,if,for,while,quote,begin,do,macro' |
+        \ let b:endwise_pattern = '^\(.*=\)\?\s*\(mutable\)*\zs\%(module\|struct\|function\|if\|for\|while\|quote\|begin\|do\|macro\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<do\ze\%(\s*|.*|\)\=\s*$' |
+        \ let b:endwise_syngroups = 'juliaModule,juliaStruct,juliaFunction,juliaConditional,juliaRepeat,juliaExpression,juliaMacro'
   autocmd FileType htmldjango
         \ let b:endwise_addition = '{% end& %}' |
         \ let b:endwise_words = 'autoescape,block,blocktrans,cache,comment,filter,for,if,ifchanged,ifequal,ifnotequal,language,spaceless,verbatim,with' |
