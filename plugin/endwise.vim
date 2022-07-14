@@ -89,7 +89,7 @@ augroup endwise " {{{1
 augroup END " }}}1
 
 function! s:abbrev() abort
-  if get(g:, 'endwise_abbreviations', 0) && &buftype =~# '^\%(nowrite\|acwrite\)\=$'
+  if get(g:, 'endwise_abbreviations', 0) && &buftype =~# '^\%(nowrite\)\=$'
     for word in split(get(b:, 'endwise_words', ''), ',')
       execute 'iabbrev <buffer><script>' word word.'<CR><SID>(endwise-append)<Space><C-U><BS>'
     endfor
@@ -101,7 +101,7 @@ endfunction
 function! EndwiseAppend(...) abort
   if !a:0 || type(a:1) != type('')
     return "\<C-R>=EndwiseDiscretionary()\r"
-  elseif a:1 =~# "\r"
+  elseif a:1 =~# "\r" && &buftype =~# '^\%(nowrite\)\=$'
     return a:1 . "\<C-R>=EndwiseDiscretionary()\r"
   else
     return a:1
@@ -156,7 +156,7 @@ endfunction
 
 function! s:crend(always) abort
   let n = ""
-  if &buftype !~# '^\%(nowrite\|acwrite\)\=$' || !exists("b:endwise_addition") || !exists("b:endwise_words") || !exists("b:endwise_syngroups")
+  if &buftype !~# '^\%(nowrite\)\=$' || !exists("b:endwise_addition") || !exists("b:endwise_words") || !exists("b:endwise_syngroups")
     return n
   endif
   let synids = join(map(split(b:endwise_syngroups, ','), 'hlID(v:val)'), ',')
