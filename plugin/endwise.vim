@@ -12,7 +12,7 @@ let g:loaded_endwise = 1
 augroup endwise " {{{1
   autocmd!
   autocmd FileType fortran
-        \ let procprefix = '\%(\s*\%(pure\|impure\|elemental\|module\|recursive\)\s\+\)\{,2}' |
+        \ let procprefix = '\%(\s*\%(pure\%(\s\+impure\)\@!\|impure\%(\s\+pure\)\@!\|elemental\|module\|recursive\%(\s\+non_recursive)\@!\|non_recursive\%(\s\+recursive)\)\s\+\)\{,3}' |
         \ let proctype = '\%(\s*\%(\%(integer\|real\|complex\|logical\|double\s\+precision\)\s*\%((\%(\s*kind\s*=\)\=\s*\w\+\s*)\s\+\)\=\)'
           \ .'\|type\s*(\s*\w\+\s*)\s\+\|character\s*\%((\%(\%(\s*len\s*=\)\=\s*\d\+\s*,\=\|\%(\s*kind\s*=\)\=\s*\w\+\s*,\=\)\{,2},\@<!)\s\+\)\=\)\=' |
         \ let b:endwise_addition = '\="end " . substitute(submatch(0),"\\%(\\s*(\\%(\\a\\w*\\s*\\([,:]\\s*\\a\\w*\\s*\\)*\\)\\=)\\s*\\|type\\zs.\\{-}\\ze\\%(\\a\\w*\\)$\\)"," ","g")' |
