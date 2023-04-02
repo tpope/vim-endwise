@@ -83,6 +83,11 @@ augroup endwise " {{{1
         \ let b:endwise_addition = 'endsnippet' |
         \ let b:endwise_words = 'snippet' |
         \ let b:endwise_syngroups = 'snipSnippet,snipSnippetHeader,snipSnippetHeaderKeyword'
+  autocmd FileType cmake
+        \ let b:endwise_addition = '\=submatch(0)==#toupper(submatch(0)) ? "END".submatch(0)."()" : "end".submatch(0)."()"' |
+        \ let b:endwise_words = 'foreach,function,if,macro,while' |
+        \ let b:endwise_pattern = '\%(\<end\>.*\)\@<!\<&\>' |
+        \ let b:endwise_syngroups = 'cmakeStatement,cmakeCommandConditional,cmakeCommandRepeat,cmakeCommand'
   autocmd FileType * call s:abbrev()
   autocmd CmdwinEnter * call s:NeutralizeMap()
   autocmd VimEnter * call s:DefineMap()
