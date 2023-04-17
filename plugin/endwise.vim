@@ -83,6 +83,11 @@ augroup endwise " {{{1
         \ let b:endwise_addition = 'endsnippet' |
         \ let b:endwise_words = 'snippet' |
         \ let b:endwise_syngroups = 'snipSnippet,snipSnippetHeader,snipSnippetHeaderKeyword'
+  autocmd FileType ocaml
+        \ let b:endwise_addition = '\=submatch(0) ==# "do" ? "done" : submatch(0) =~# "match\\|try" ? "with" : "end"' |
+        \ let b:endwise_words = 'struct,sig,begin,object,do,match,try' |
+        \ let b:endwise_pattern = '\zs\<&\>\ze\%(.*\%(end\|done\|with\)\)\@!.*$' |
+        \ let b:endwise_syngroups = 'ocamlStruct,ocamlStructEncl,ocamlSig,ocamlSigEncl,ocamlObject,ocamlLCIdentifier,ocamlKeyword,ocamlDo,ocamlEnd,'
   autocmd FileType * call s:abbrev()
   autocmd CmdwinEnter * call s:NeutralizeMap()
   autocmd VimEnter * call s:DefineMap()
