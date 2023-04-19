@@ -63,9 +63,9 @@ augroup endwise " {{{1
         \ let b:endwise_pattern = '^\s*\(d\zsef\zeine\|\zsif\zen\=\(def\|eq\)\)\>' |
         \ let b:endwise_syngroups = 'makePreCondit,makeDefine'
   autocmd FileType verilog,systemverilog
-        \ let b:endwise_addition = 'end&' |
+        \ let b:endwise_addition = '\=submatch(0)==#"begin" ? "end" : "end" . submatch(0)' |
         \ let b:endwise_words = 'begin,module,case,function,primitive,specify,task,generate,package,interface,class,program,property,sequence,table,clocking,checker,config' |
-        \ let b:endwise_pattern = '\<\%(\zs\zebegin\|module\|case\|function\|primitive\|specify\|task\|generate\|package\|interface\|class\|program\|property\|sequence\|table\|clocking\|checker\|config\)\>' |
+        \ let b:endwise_pattern = '\<\%(begin\|module\|case\|function\|primitive\|specify\|task\|generate\|package\|interface\|class\|program\|property\|sequence\|table\|clocking\|checker\|config\)\>' |
         \ let b:endwise_syngroups = 'verilogConditional,verilogLabel,verilogStatement,systemverilogStatement'
   autocmd FileType matlab
         \ let b:endwise_addition = 'end' |
