@@ -138,7 +138,7 @@ function! s:DefineMap() abort
     return
   endif
   if get(map, 'expr') && type(get(map, 'callback')) == type(function('tr'))
-    lua local m = vim.fn.maparg('<CR>', 'i', 0, 1); vim.api.nvim_set_keymap('i', '<CR>', m.rhs or '', { expr = true, callback = function() return vim.fn.EndwiseAppend(vim.api.nvim_replace_termcodes(m.callback(), true, true, m.replace_keycodes)) end, desc = "EndwiseAppend() wrapped around " .. (m.desc or "Lua function") })
+    lua local m = vim.fn.maparg('<CR>', 'i', 0, 1); vim.api.nvim_set_keymap('i', '<CR>', m.rhs or '', { expr = true, silent = true, callback = function() return vim.fn.EndwiseAppend(vim.api.nvim_replace_termcodes(m.callback(), true, true, m.replace_keycodes)) end, desc = "EndwiseAppend() wrapped around " .. (m.desc or "Lua function") })
   elseif get(map, 'expr') && !empty(rhs)
     exe "imap <silent><script><expr> <CR> EndwiseAppend(" . rhs . ")"
   elseif rhs =~? '<cr>' && rhs !~? '<plug>'
