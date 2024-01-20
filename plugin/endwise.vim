@@ -11,6 +11,24 @@ let g:loaded_endwise = 1
 
 augroup endwise " {{{1
   autocmd!
+  autocmd FileType fortran
+        \ let procprefix = '\%(\s*\%(pure\%(\s\+impure\)\@!\|impure\%(\s\+pure\)\@!\|elemental\|module\|recursive\%(\s\+non_recursive\)\@!\|non_recursive\%(\s\+recursive\)\)\s\+\)\{,3}' |
+        \ let proctype = '\%(\s*\%(\%(integer\|real\|complex\|logical\|double\s\+precision\)\s*\%((\%(\s*kind\s*=\)\=\s*\w\+\s*)\s\+\)\=\)'
+          \ .'\|type\s*(\s*\w\+\s*)\s\+\|character\s*\%((\%(\%(\s*len\s*=\)\=\s*\d\+\s*,\=\|\%(\s*kind\s*=\)\=\s*\w\+\s*,\=\)\{,2},\@<!)\s\+\)\=\)\=' |
+        \ let b:endwise_addition = '\="end " . substitute(submatch(0),"\\%(\\s*(\\%(\\a\\w*\\s*\\([,:]\\s*\\a\\w*\\s*\\)*\\)\\=)\\s*\\|type\\zs.\\{-}\\ze\\%(\\a\\w*\\)$\\)"," ","g")' |
+        \ let b:endwise_words = 'program,module,submodule,function,subroutine,associate,interface,type,do,if,select,where,block,forall,critical,enum' |
+        \ let b:endwise_pattern = '^\s*\%('
+          \ .'\zs\%(program\s\+\|module\s\+\(procedure\|.\{-}\%(subroutine\|function\)\)\@!\|submodule\s\+\%((\a\w*\s*\(:\a\w*\s*\)*)\s*\)\=\)\%(\a\w*\)\ze'
+          \ .'\|\%('.procprefix.'\zssubroutine\|\%('.procprefix.'\|'.proctype.'\)\{,2}\zsfunction\)\s\+\%(\a\w*\)\ze'
+          \ .'\|\zstype\%(\s*is\)\@!\s*\%(\%(,\s*\S*\)*\s*::\)\=\s*\%(\a\w*\)\ze'
+          \ .'\|\%(\a\w*\s*:\s*\)\=\%(\%(\zsassociate\ze\|\zsselect\ze\s*\%(case\|type\|rank\)\|\zsblock\ze\|\zsforall\ze\|\zscritical\ze\|\zswhere\ze\)'
+          \ .'\|\%(\<end\s\+\)\@<!\zsdo\ze\%(\s\+\a\|\s*$\)'
+          \ .'\|\%(\<e\%(nd\|lse\)\s\+\)\@<!\zsif\ze\s*(.\+)\s*then\)'
+          \ .'\|\%(abstract\s*\)\=\zsinterface\ze'
+          \ .'\|\zsenum\ze\s*,\s*bind\s*(\s*c\s*)'
+          \ .'\)' |
+        \ let b:endwise_syngroups = 'fortranUnitHeader,fortranType,fortranConditional,fortranRepeat'
+          " \ .',fortranModule,fortranFunction,fortranSubroutine,fortranAssociate,fortranInterface,fortranTypeDef'
   autocmd FileType lua
         \ let b:endwise_addition = 'end' |
         \ let b:endwise_words = 'function,do,then' |
