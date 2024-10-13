@@ -137,14 +137,13 @@ function! s:DefineMap() abort
   if get(g:, 'endwise_no_maps') || get(g:, 'endwise_no_mappings') || rhs =~# '[eE]ndwise\|<Plug>DiscretionaryEnd' || get(map, 'desc') =~# 'Endwise' || get(map, 'buffer')
     return
   endif
+  let imap = get(map, 'script', rhs !~? '<plug>') || get(map, 'noremap') ? 'imap <script>' : 'imap'
   if get(map, 'expr') && type(get(map, 'callback')) == type(function('tr'))
     lua local m = vim.fn.maparg('<CR>', 'i', 0, 1); vim.api.nvim_set_keymap('i', '<CR>', m.rhs or '', { expr = true, silent = true, callback = function() return vim.fn.EndwiseAppend(vim.api.nvim_replace_termcodes(m.callback(), true, true, m.replace_keycodes)) end, desc = "EndwiseAppend() wrapped around " .. (m.desc or "Lua function") })
   elseif get(map, 'expr') && !empty(rhs)
-    exe "imap <silent><script><expr> <CR> EndwiseAppend(" . rhs . ")"
-  elseif rhs =~? '<cr>' && rhs !~? '<plug>'
-    exe "imap <silent><script> <CR>" rhs."<SID>(endwise-append)"
+    exe imap '<silent><expr> <CR> EndwiseAppend(' . rhs . ')'
   elseif rhs =~? '<cr>' || rhs =~# '<[Pp]lug>\w\+CR'
-    exe "imap <silent> <CR>" rhs."<SID>(endwise-append)"
+    exe imap '<silent> <CR>' rhs . '<SID>(endwise-append)'
   else
     imap <silent><script><expr> <CR> EndwiseAppend("<Bslash>r")
   endif
