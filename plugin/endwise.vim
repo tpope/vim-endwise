@@ -134,7 +134,7 @@ imap <script> <Plug>DiscretionaryEnd <SID>(endwise-append)
 function! s:DefineMap() abort
   let map = maparg('<CR>', 'i', 0, 1)
   let rhs = substitute(get(map, 'rhs', ''), '\c<sid>', '<SNR>' . get(map, 'sid') . '_', 'g')
-  if exists('g:endwise_no_mappings') || rhs =~# '[eE]ndwise\|<Plug>DiscretionaryEnd' || get(map, 'desc') =~# 'Endwise' || get(map, 'buffer')
+  if get(g:, 'endwise_no_maps') || get(g:, 'endwise_no_mappings') || rhs =~# '[eE]ndwise\|<Plug>DiscretionaryEnd' || get(map, 'desc') =~# 'Endwise' || get(map, 'buffer')
     return
   endif
   if get(map, 'expr') && type(get(map, 'callback')) == type(function('tr'))
