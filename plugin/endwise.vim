@@ -145,7 +145,7 @@ function! s:DefineMap() abort
   elseif rhs =~? '^\%(<c-\]>\)\=<cr>' || rhs =~# '<[Pp]lug>\w\+CR'
     exe imap '<silent> <CR>' rhs . '<SID>(endwise-append)'
   else
-    imap <silent><script><expr> <CR> EndwiseAppend("<Bslash>r")
+    imap <silent><script><expr> <CR> EndwiseAppend("<Bslash>035<Bslash>r")
   endif
 endfunction
 call s:DefineMap()
